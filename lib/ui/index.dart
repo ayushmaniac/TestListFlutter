@@ -18,9 +18,9 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   fetchBooks() async {
-   var bookUrl = "https://jsonkeeper.com/b/3CSV";
-   var bookResponse = http.get(Uri.parse(bookUrl));
-   print(bookResponse);
+    var bookUrl = "https://jsonkeeper.com/b/3CSV";
+    var bookResponse = await http.get(bookUrl);
+    print(bookResponse.body);
   }
 
   @override
@@ -29,47 +29,57 @@ class _IndexPageState extends State<IndexPage> {
       appBar: AppBar(
         title: Text("List App"),
       ),
-      body : getBody(),
+      body: getBody(),
     );
   }
 
-  Widget getBody(){
-    return ListView.builder(itemBuilder: (context, index){
+  Widget getBody() {
+    return ListView.builder(itemBuilder: (context, index) {
       return getBooksCard();
     });
   }
 
-  Widget getBooksCard(){
+  Widget getBooksCard() {
     return Card(
-      child : Padding(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-      child: ListTile(
-        title: Row(
-          children: <Widget>[
-            Container(
-              width: 125,
-              height: 150,
-              decoration: BoxDecoration(
-                color: colorPrimary,
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: NetworkImage("https://media.wired.com/photos/5b8999943667562d3024c321/master/w_2560%2Cc_limit/trash2-01.jpg")
+        child: ListTile(
+          title: Row(
+            children: <Widget>[
+              Container(
+                width: 125,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: colorPrimary,
+                  borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://media.wired.com/photos/5b8999943667562d3024c321/master/w_2560%2Cc_limit/trash2-01.jpg")),
                 ),
               ),
-            ),
-            SizedBox(width: 20,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("RD Sharma", style: TextStyle(fontSize: 25),),
-                SizedBox(height: 10,),
-                Text("Mathematics", style: TextStyle(fontSize: 16),),
-
-              ],
-            )
-          ],
+              SizedBox(
+                width: 20,
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "RD Sharma",
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Mathematics",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
